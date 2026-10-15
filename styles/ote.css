@@ -1,0 +1,213 @@
+/* ==========================================================================
+   Over the Edge (2nd Edition) — styles
+   The sheet is a "paper" page reproducing the printed character sheet. Every
+   dimension is expressed in --u, one unit = 1/742 of the page width (the printed
+   sheet is 742 units between margins), so the layout scales with the window.
+   ========================================================================== */
+
+.ote {
+  --ote-ink: #1a1a1a;
+  --ote-line: #2b2b2b;
+  --ote-paper: #fff;
+  --ote-faint: #6b6b6b;
+  --ote-accent: #8a1c1c;
+  --ote-label-font: "Gill Sans", "Gill Sans MT", "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+/* ------------------------------------------------------------- Window chrome */
+.ote.application { min-width: 560px; }
+.ote.application .window-content { padding: 0; background: #cfcbc2; overflow: auto; }
+.ote .ote-sheet { display: flex; flex-direction: column; min-height: 100%; }
+
+.ote .ote-fs { border: 0; margin: 0; padding: 0; min-width: 0; }
+
+.ote .ote-toolbar {
+  display: flex; justify-content: space-between; align-items: center; gap: 6px;
+  padding: 4px 8px; background: #2a2a2a; flex: none;
+}
+.ote .ote-toolbar button {
+  width: auto; height: 24px; margin: 0; padding: 0 9px; line-height: 1;
+  font-size: 12px; color: #e9e9e9; background: #444; border: 1px solid #666; border-radius: 3px;
+}
+.ote .ote-toolbar button:hover, .ote .ote-toolbar button.active { background: #7a2020; border-color: #a33; color: #fff; }
+.ote .ote-tabs, .ote .ote-quick { display: flex; gap: 4px; }
+
+/* ----------------------------------------------------------------- The page */
+.ote .ote-page {
+  container-type: inline-size;
+  margin: 10px; padding: 16px 18px 20px;
+  background: var(--ote-paper); color: var(--ote-ink);
+  box-shadow: 0 1px 7px rgba(0, 0, 0, .45);
+  font-family: var(--ote-label-font);
+}
+.ote .ote-grid, .ote .ote-notes-grid { --u: calc(100cqw / 742); }
+
+.ote .ote-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  column-gap: calc(28 * var(--u)); row-gap: calc(14.5 * var(--u));
+  font-size: calc(13 * var(--u)); line-height: 1.25;
+}
+.ote .ote-col { display: flex; flex-direction: column; gap: calc(14.5 * var(--u)); min-width: 0; }
+
+.ote .ote-header { height: calc(177 * var(--u)); display: flex; align-items: center; }
+.ote .ote-header img { width: 100%; height: 100%; object-fit: contain; object-position: left center; border: 0; }
+
+/* Box heights taken from the printed sheet (units) */
+.ote .h-name, .ote .h-player { height: calc(82 * var(--u)); }
+.ote .h-traits, .ote .h-drawing { height: calc(330 * var(--u)); }
+.ote .h-poss { height: calc(205 * var(--u)); }
+.ote .h-wounds { height: calc(150 * var(--u)); }
+.ote .h-phys, .ote .h-pers { height: calc(177 * var(--u)); }
+
+.ote .ote-bottom {
+  grid-column: 1 / -1; height: calc(122 * var(--u));
+  display: grid; grid-template-columns: repeat(3, calc(165 * var(--u))) 1fr; column-gap: calc(14 * var(--u));
+}
+.ote .ote-logo { display: flex; align-items: center; justify-content: flex-end; min-width: 0; }
+.ote .ote-logo img { max-width: 100%; max-height: 100%; object-fit: contain; border: 0; }
+
+/* ---------------------------------------------------------------------- Box */
+.ote .box {
+  position: relative; box-sizing: border-box; min-width: 0; min-height: 0; overflow: hidden;
+  display: flex; flex-direction: column;
+  padding: calc(7 * var(--u)) calc(10 * var(--u));
+  border: max(1.2px, calc(1.6 * var(--u))) solid var(--ote-line);
+  background: var(--ote-paper);
+}
+.ote .box > .label {
+  flex: none; margin: 0 0 calc(3 * var(--u)); padding: 0; border: 0;
+  font: italic 300 calc(15.5 * var(--u)) / 1.15 var(--ote-label-font);
+  letter-spacing: .01em; color: #222; text-shadow: none;
+}
+.ote .box.right > .label { text-align: right; }
+.ote .box.center > .label { text-align: center; }
+.ote .box .body { flex: 1; min-height: 0; overflow: auto; }
+.ote .box-tools { position: absolute; top: calc(7 * var(--u)); right: calc(10 * var(--u)); display: flex; gap: calc(8 * var(--u)); }
+
+/* Plain inputs so the box looks like paper, not a form */
+.ote .ote-page input[type="text"], .ote .ote-page input[type="number"],
+.ote .ote-page textarea, .ote .ote-page select {
+  background: transparent; color: var(--ote-ink); font: inherit;
+  border: 0; border-radius: 0; box-shadow: none; padding: 0 2px; height: auto; min-height: 0;
+}
+.ote .ote-page input:focus, .ote .ote-page textarea:focus, .ote .ote-page select:focus {
+  outline: none; box-shadow: none; background: #f4f1e4;
+}
+.ote .ote-page textarea { width: 100%; resize: none; line-height: 1.3; }
+.ote .ote-page input[type="number"]::-webkit-inner-spin-button,
+.ote .ote-page input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.ote .ote-page input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.ote .ote-page .big { width: 100%; flex: 1; font-size: calc(26 * var(--u)); }
+
+.ote .ote-page a { color: var(--ote-faint); cursor: pointer; text-decoration: none; }
+.ote .ote-page a:hover { color: #000; text-shadow: none; }
+.ote .ote-page button {
+  width: auto; height: auto; margin: 0; padding: 0; line-height: 1;
+  background: transparent; border: 0; box-shadow: none; color: var(--ote-faint); cursor: pointer;
+}
+.ote .ote-page button:hover { color: #000; box-shadow: none; text-shadow: none; }
+
+/* ------------------------------------------------------------------ Traits */
+.ote .ote-traits { padding-right: 2px; }
+.ote .trait-group + .trait-group { margin-top: calc(5 * var(--u)); }
+.ote .trait-group-head {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: calc(10.5 * var(--u)); text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ote-faint); border-bottom: 1px solid #bbb; padding-bottom: 1px;
+}
+.ote .trait-row { display: flex; flex-wrap: wrap; align-items: center; gap: calc(5 * var(--u)); padding: calc(2 * var(--u)) 0; }
+.ote .trait-row .roll { font-size: calc(15 * var(--u)); }
+.ote .trait-row .trait-dice { width: calc(24 * var(--u)); text-align: center; border-bottom: 1px dotted #999 !important; font-weight: 600; }
+.ote .trait-row .trait-name { flex: 1; min-width: 0; color: var(--ote-ink); font-size: calc(14.5 * var(--u)); font-weight: 600; }
+.ote .trait-row .star { opacity: .25; }
+.ote .trait-row .star.on { opacity: 1; color: var(--ote-accent); }
+.ote .trait-row .fringe { color: #6a3d9a; }
+.ote .trait-row .del, .ote .item-row .del { opacity: 0; font-size: calc(11 * var(--u)); }
+.ote .trait-row:hover .del, .ote .item-row:hover .del { opacity: 1; }
+.ote .trait-row .sign { flex-basis: 100%; padding-left: calc(30 * var(--u)); font-style: italic; color: var(--ote-faint); font-size: calc(12 * var(--u)); }
+
+/* ----------------------------------------------------------- Possessions */
+.ote .item-row { display: flex; align-items: center; gap: calc(6 * var(--u)); padding: calc(1.5 * var(--u)) 0; }
+.ote .item-row .item-name { flex: 1; min-width: 0; color: var(--ote-ink); }
+.ote .item-row .item-meta { color: var(--ote-faint); font-size: calc(11.5 * var(--u)); white-space: nowrap; }
+.ote .item-row .item-qty { width: calc(26 * var(--u)); text-align: center; border-bottom: 1px dotted #999 !important; }
+.ote .item-row .equip { opacity: .3; }
+.ote .item-row .equip.on { opacity: 1; color: #1d5e8a; }
+.ote .item-row.unequipped .item-name { color: var(--ote-faint); text-decoration: line-through; }
+.ote .funds { flex: none; display: flex; gap: 6px; align-items: baseline; border-top: 1px solid #ccc; padding-top: calc(3 * var(--u)); color: var(--ote-faint); font-style: italic; }
+.ote .funds input { flex: 1; font-style: normal; }
+
+/* -------------------------------------------------------------- Wounds etc */
+.ote .badge {
+  float: right; padding: 0 calc(6 * var(--u)); font-size: calc(11 * var(--u)); font-style: normal; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #b8860b;
+}
+.ote .badge.down { background: var(--ote-accent); }
+.ote .badge.dead { background: #000; }
+
+.ote .portrait-wrap { display: flex; align-items: center; justify-content: center; }
+.ote .portrait { max-width: 100%; max-height: 100%; object-fit: contain; border: 0; cursor: pointer; }
+
+/* ------------------------------------------------------ HP / pools (bottom) */
+.ote .h-stat { height: 100%; }
+.ote .stat-vals { flex: 1; display: flex; align-items: center; justify-content: center; gap: calc(3 * var(--u)); font-size: calc(30 * var(--u)); font-weight: 300; }
+.ote .stat-vals input { width: calc(58 * var(--u)); text-align: center; font-size: inherit !important; font-weight: inherit; }
+.ote .stat-vals input[name$=".max"] { color: var(--ote-faint); }
+.ote .stat-note { text-align: center; font-size: calc(11 * var(--u)); font-style: italic; color: #1d5e8a; }
+.ote .stat-tools { flex: none; display: flex; justify-content: center; gap: calc(12 * var(--u)); font-size: calc(14 * var(--u)); }
+
+.ote .gmc-combat .gmc-grid { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: calc(4 * var(--u)); }
+.ote .gmc-combat label { display: flex; justify-content: space-between; align-items: baseline; font-style: italic; }
+.ote .gmc-combat label span { font-style: normal; }
+.ote .gmc-combat input { width: calc(26 * var(--u)); text-align: center; border-bottom: 1px dotted #999 !important; }
+
+/* ------------------------------------------------------------- Notes tab */
+.ote .ote-notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: calc(14.5 * var(--u)); font-size: calc(13 * var(--u)); }
+.ote .ote-notes .box.wide { grid-column: 1 / -1; }
+.ote .ote-notes .box.tall { min-height: calc(150 * var(--u)); }
+.ote .ote-notes .box input[type="text"], .ote .ote-notes .box input[type="number"] { width: 100%; border-bottom: 1px dotted #999 !important; }
+.ote .inline-fields { display: flex; gap: 8px; }
+
+/* ------------------------------------------------------------- Item sheet */
+.ote.item-sheet .window-content { padding: 8px 12px; }
+.ote .ote-item-sheet .item-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.ote .ote-item-sheet .item-head img { width: 44px; height: 44px; border: 1px solid var(--ote-line); cursor: pointer; object-fit: cover; }
+.ote .ote-item-sheet .item-head input { font-size: 1.4em; height: 2em; }
+.ote .ote-item-sheet textarea { width: 100%; }
+
+/* --------------------------------------------------------------- Dialogs */
+.ote-dialog [hidden] { display: none !important; }
+.ote-dialog .hint { flex-basis: 100%; margin: 2px 0 0; font-size: .85em; opacity: .75; }
+.ote-dialog fieldset { margin: 6px 0; }
+
+/* ------------------------------------------------------------ Chat cards */
+.ote-card { font-size: var(--font-size-13, 13px); }
+.ote-card-title { font-weight: 700; margin-bottom: 4px; border-bottom: 1px solid var(--color-border-light-1, #999); }
+.ote-card-title small { font-weight: 400; opacity: .7; }
+.ote-dice { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0; }
+.ote-dice .die {
+  min-width: 26px; height: 26px; line-height: 24px; text-align: center; font-weight: 700; font-size: 15px;
+  background: #fff; color: #111; border: 2px solid #222; border-radius: 4px;
+}
+.ote-dice .die.dropped { opacity: .35; text-decoration: line-through; border-style: dashed; }
+.ote-dice .die.six:not(.dropped) { background: #f1d36b; }
+.ote-dice .die.one:not(.dropped) { background: #e8a0a0; }
+.ote-dice .die.extra { background: #cfe9cf; padding: 0 4px; }
+.ote-tag { display: inline-block; margin: 0 4px 2px 0; padding: 0 6px; font-size: 11px; border: 1px solid currentColor; border-radius: 9px; opacity: .85; }
+.ote-tag.good { color: #1f7a3a; }
+.ote-tag.bad { color: #a01c1c; }
+.ote-total { font-size: 28px; font-weight: 700; line-height: 1.1; text-align: center; }
+.ote-total small { font-size: 12px; font-weight: 400; }
+.ote-banner { margin: 3px 0; padding: 2px 6px; text-align: center; font-weight: 700; border: 1px solid #b8860b; color: #8a6500; }
+.ote-banner.bad { border-color: #a01c1c; color: #a01c1c; }
+.ote-outcome { margin-top: 2px; text-align: center; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.ote-outcome.success { color: #1f7a3a; }
+.ote-outcome.failure { color: #a01c1c; }
+.ote-outcome.stalemate { color: #8a6500; }
+.ote-attack { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 4px; font-size: 12px; }
+.ote-versus { display: flex; justify-content: space-between; }
+.ote-breakdown { margin: 4px 0; padding-left: 16px; font-size: 12px; }
+
+/* Notes tab: number + unit select side by side */
+.ote .ote-notes .inline-fields input[type="number"] { flex: none; width: 4em; }
+.ote .ote-notes .inline-fields select { flex: 1; min-width: 0; }

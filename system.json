@@ -1,0 +1,33 @@
+{
+  "id": "over-the-edge",
+  "title": "Over the Edge (2nd Edition)",
+  "description": "<p>An unofficial Foundry VTT implementation of <em>Over the Edge</em>, 2nd Edition (Atlas Games). Requires ownership of the rulebook. Character sheet modelled on the official printed sheet.</p>",
+  "version": "0.1.1",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    { "name": "Unofficial fan implementation" }
+  ],
+  "esmodules": ["module/ote.mjs"],
+  "styles": ["styles/ote.css"],
+  "languages": [
+    { "lang": "en", "name": "English", "path": "lang/en.json" }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "gmc": {}
+    },
+    "Item": {
+      "trait": {},
+      "weapon": {},
+      "armor": {},
+      "gear": {}
+    }
+  },
+  "primaryTokenAttribute": "hp",
+  "secondaryTokenAttribute": "psychic",
+  "grid": { "distance": 1, "units": "m" }
+}

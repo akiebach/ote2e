@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+*.log
+# LevelDB lock files from compendium packs
+packs/**/LOCK

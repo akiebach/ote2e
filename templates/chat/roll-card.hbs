@@ -1,0 +1,32 @@
+<div class="ote-card ote-roll">
+  <header class="ote-card-title">{{label}}</header>
+
+  <div class="ote-dice" title="{{formula}}">
+    {{#each faces}}<span class="die{{#unless kept}} dropped{{/unless}}{{#if six}} six{{/if}}{{#if one}} one{{/if}}">{{value}}</span>{{/each}}
+    {{#each extraFaces}}<span class="die extra">+{{this}}</span>{{/each}}
+  </div>
+
+  {{#if bonus}}<span class="ote-tag good">+{{bonus}} {{localize "OTE.Chat.Bonus"}}</span>{{/if}}
+  {{#if penalty}}<span class="ote-tag bad">−{{penalty}} {{localize "OTE.Chat.Penalty"}}</span>{{/if}}
+  {{#if push}}<span class="ote-tag">{{localize "OTE.Chat.Pushed"}}</span>{{/if}}
+  {{#if xpSpent}}<span class="ote-tag">{{localize "OTE.Chat.XP"}}{{#if xpReason}}: {{xpReason}}{{/if}}</span>{{/if}}
+  {{#if toppedOff}}<span class="ote-tag good">{{localize "OTE.Chat.ToppedOff"}}</span>{{/if}}
+
+  <div class="ote-total">{{total}}</div>
+
+  {{#if botch}}<div class="ote-banner bad">{{localize "OTE.Botch"}}</div>{{/if}}
+  {{#if sixes}}<div class="ote-banner">{{localize "OTE.Chat.Sixes"}} × {{sixes}}</div>{{/if}}
+
+  {{#if hasTarget}}
+  <div class="ote-outcome {{outcome}}">
+    {{#if showTarget}}{{localize "OTE.Chat.Versus"}} {{target}} — {{/if}}{{outcomeLabel}}{{#if margin}} ({{margin}}){{/if}}
+  </div>
+  {{/if}}
+
+  {{#if attack}}
+  <div class="ote-attack">
+    {{localize "OTE.Weapon.DamageFactor"}} ×{{attack.factor}}{{#if attack.special}} · {{localize "OTE.Chat.Special"}}{{/if}}
+    <button type="button" data-ote-action="resolveAttack"><i class="fa-solid fa-crosshairs"></i> {{localize "OTE.Chat.Resolve"}}</button>
+  </div>
+  {{/if}}
+</div>

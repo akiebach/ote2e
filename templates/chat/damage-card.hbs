@@ -1,0 +1,34 @@
+<div class="ote-card ote-damage">
+  <header class="ote-card-title">{{attackerName}} → {{targetName}}{{#if weaponName}} <small>({{weaponName}})</small>{{/if}}</header>
+
+  <div class="ote-versus">
+    <span>{{localize "OTE.Attack"}}: <strong>{{attack}}</strong>{{#if attackBotch}} ({{localize "OTE.Botch"}}){{/if}}</span>
+    <span>{{localize "OTE.Defense"}}: <strong>{{defense}}</strong>{{#if defenseBotch}} ({{localize "OTE.Botch"}}){{/if}}</span>
+  </div>
+
+  {{#if hit}}
+    <ul class="ote-breakdown">
+      <li>{{localize "OTE.Chat.Margin"}} {{margin}} × {{localize "OTE.Weapon.DamageFactor"}} {{factor}} = <strong>{{raw}}</strong></li>
+      {{#if hasArmor}}
+      <li>{{localize "OTE.Armor.Title"}}:
+        {{#if armor.dice}}{{armor.dice}}d → {{armor.regRoll}}{{/if}}
+        {{#if armor.points}}{{#if armor.dice}} + {{/if}}{{armor.points}} {{localize "OTE.ArmorUnit.points"}}{{/if}}
+        {{#if armor.bpDice}} · {{localize "OTE.Armor.Bulletproof"}} {{armor.bpDice}}b → {{armor.bpRoll}}{{/if}}
+        {{#if armor.reduction}} · −{{armor.reduction}}{{/if}}
+        {{#if armor.divide}}{{#if armor.bpDice}} · ÷{{armor.divide}}{{/if}}{{/if}}
+      </li>
+      {{/if}}
+      {{#if blocked}}<li>{{localize "OTE.Chat.Blocked"}}</li>{{/if}}
+    </ul>
+    <div class="ote-total">{{damage}}{{#if stun}} <small>{{localize "OTE.Damage.StunShort"}}</small>{{/if}}</div>
+    {{#if damage}}
+    <div class="ote-attack">
+      <button type="button" data-ote-action="applyDamage"><i class="fa-solid fa-burst"></i> {{localize "OTE.Chat.ApplyDamage"}}</button>
+    </div>
+    {{else}}
+    <div class="ote-outcome stalemate">{{localize "OTE.Chat.NoDamage"}}</div>
+    {{/if}}
+  {{else}}
+    <div class="ote-outcome failure">{{localize "OTE.Chat.Miss"}}</div>
+  {{/if}}
+</div>

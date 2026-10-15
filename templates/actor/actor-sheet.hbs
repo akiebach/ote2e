@@ -1,0 +1,236 @@
+<div class="ote-sheet {{actor.type}}">
+
+  {{!-- Tool strip (not part of the "paper") --}}
+  <nav class="ote-toolbar">
+    <div class="ote-tabs">
+      <button type="button" data-action="showTab" data-tab="sheet" class="{{#if tabSheet}}active{{/if}}">{{localize "OTE.Tab.Sheet"}}</button>
+      <button type="button" data-action="showTab" data-tab="notes" class="{{#unless tabSheet}}active{{/unless}}">{{localize "OTE.Tab.Notes"}}</button>
+    </div>
+    {{#if editable}}
+    <div class="ote-quick">
+      <button type="button" data-action="rollFate" data-tooltip="OTE.HandOfFate"><i class="fa-solid fa-dice"></i> {{localize "OTE.HandOfFate"}}</button>
+      <button type="button" data-action="rollDefense" data-tooltip="OTE.Defense"><i class="fa-solid fa-shield-halved"></i> {{localize "OTE.Defense"}}</button>
+      <button type="button" data-action="rollInitiative" data-tooltip="OTE.Initiative"><i class="fa-solid fa-bolt"></i> {{localize "OTE.Initiative"}}</button>
+    </div>
+    {{/if}}
+  </nav>
+
+  <fieldset class="ote-fs" {{#unless editable}}disabled{{/unless}}>
+
+  {{#if tabSheet}}
+  {{!-- ============================ THE SHEET ============================ --}}
+  <div class="ote-page">
+    <div class="ote-grid">
+
+      {{!-- ---------------------------- Left column ---------------------------- --}}
+      <div class="ote-col">
+        <div class="ote-header"><img src="{{headerImg}}" alt="Over the Edge — Character Sheet"></div>
+
+        <section class="box h-traits">
+          <h3 class="label">{{localize "OTE.TraitsSigns"}}</h3>
+          <div class="body ote-traits">
+            {{#each traitGroups}}
+            <div class="trait-group">
+              <div class="trait-group-head">
+                <span>{{label}}</span>
+                <a data-action="createTrait" data-kind="{{kind}}" data-tooltip="OTE.AddTrait"><i class="fa-solid fa-plus"></i></a>
+              </div>
+              {{#each rows}}
+              <div class="trait-row">
+                {{#unless isFlaw}}
+                <button type="button" class="roll" data-action="rollTrait" data-item-id="{{id}}" data-tooltip="OTE.RollTrait"><i class="fa-solid fa-dice-d6"></i></button>
+                <input class="trait-dice" type="number" min="0" step="1" value="{{dice}}" data-item-id="{{id}}" aria-label="{{localize 'OTE.Dice'}}">
+                {{/unless}}
+                <a class="trait-name" data-action="editItem" data-item-id="{{id}}">{{name}}</a>
+                {{#unless isFlaw}}<a class="star {{#if superior}}on{{/if}}" data-action="toggleSuperior" data-item-id="{{id}}" data-tooltip="OTE.Superior"><i class="fa-solid fa-star"></i></a>{{/unless}}
+                {{#if fringe}}<i class="fa-solid fa-bolt fringe" data-tooltip="OTE.Fringe"></i>{{/if}}
+                <a class="del" data-action="deleteItem" data-item-id="{{id}}" data-tooltip="OTE.Delete"><i class="fa-solid fa-xmark"></i></a>
+                {{#if sign}}<div class="sign">{{sign}}</div>{{/if}}
+              </div>
+              {{/each}}
+            </div>
+            {{/each}}
+          </div>
+        </section>
+
+        <section class="box h-poss">
+          <h3 class="label">{{localize "OTE.Possessions"}}</h3>
+          <div class="box-tools">
+            <a data-action="createItem" data-type="weapon" data-tooltip="OTE.AddWeapon"><i class="fa-solid fa-khanda"></i></a>
+            <a data-action="createItem" data-type="armor" data-tooltip="OTE.AddArmor"><i class="fa-solid fa-shield"></i></a>
+            <a data-action="createItem" data-type="gear" data-tooltip="OTE.AddGear"><i class="fa-solid fa-box"></i></a>
+          </div>
+          <div class="body ote-items">
+            {{#each weapons}}
+            <div class="item-row">
+              <button type="button" class="roll" data-action="rollWeapon" data-item-id="{{id}}" data-tooltip="OTE.Attack"><i class="fa-solid fa-crosshairs"></i></button>
+              <a class="item-name" data-action="editItem" data-item-id="{{id}}">{{name}}</a>
+              <span class="item-meta">{{summary}}</span>
+              <a class="del" data-action="deleteItem" data-item-id="{{id}}" data-tooltip="OTE.Delete"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            {{/each}}
+            {{#each armors}}
+            <div class="item-row {{#unless equipped}}unequipped{{/unless}}">
+              <a class="equip {{#if equipped}}on{{/if}}" data-action="toggleEquipped" data-item-id="{{id}}" data-tooltip="OTE.Equipped"><i class="fa-solid fa-shield-halved"></i></a>
+              <a class="item-name" data-action="editItem" data-item-id="{{id}}">{{name}}</a>
+              <span class="item-meta">{{summary}}</span>
+              <a class="del" data-action="deleteItem" data-item-id="{{id}}" data-tooltip="OTE.Delete"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            {{/each}}
+            {{#each gear}}
+            <div class="item-row">
+              <input class="item-qty" type="number" min="0" step="1" value="{{quantity}}" data-item-id="{{id}}" aria-label="{{localize 'OTE.Gear.Quantity'}}">
+              <a class="item-name" data-action="editItem" data-item-id="{{id}}">{{name}}</a>
+              <a class="del" data-action="deleteItem" data-item-id="{{id}}" data-tooltip="OTE.Delete"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+            {{/each}}
+          </div>
+          <label class="funds">{{localize "OTE.Funds"}}
+            <input type="text" name="system.finances" value="{{system.finances}}">
+          </label>
+        </section>
+
+        <section class="box h-wounds">
+          <h3 class="label">{{localize "OTE.Wounds"}}
+            {{#if statusLabel}}<span class="badge {{system.status.key}}">{{statusLabel}}</span>{{/if}}
+          </h3>
+          <textarea class="body" name="system.wounds">{{system.wounds}}</textarea>
+        </section>
+      </div>
+
+      {{!-- ---------------------------- Right column --------------------------- --}}
+      <div class="ote-col right">
+        <section class="box right h-name">
+          <h3 class="label">{{localize "OTE.CharacterName"}}</h3>
+          <input class="big" type="text" name="name" value="{{actor.name}}">
+        </section>
+
+        <section class="box right h-player">
+          {{#if isGMC}}
+          <h3 class="label">{{localize "OTE.GMC.Role"}}</h3>
+          <input class="big" type="text" name="system.role" value="{{system.role}}">
+          {{else}}
+          <h3 class="label">{{localize "OTE.PlayerName"}}</h3>
+          <input class="big" type="text" name="system.player" value="{{system.player}}">
+          {{/if}}
+        </section>
+
+        <section class="box right h-drawing">
+          <h3 class="label">{{localize "OTE.Drawing"}}</h3>
+          <div class="body portrait-wrap">
+            <img class="portrait" src="{{actor.img}}" alt="{{actor.name}}" data-action="editImage" data-edit="img" data-tooltip="OTE.ChangeImage">
+          </div>
+        </section>
+
+        <section class="box right h-phys">
+          <h3 class="label">{{localize "OTE.PhysicalDescription"}}</h3>
+          <textarea class="body" name="system.physicalDescription">{{system.physicalDescription}}</textarea>
+        </section>
+
+        <section class="box right h-pers">
+          <h3 class="label">{{localize "OTE.PersonalDescription"}}</h3>
+          <textarea class="body" name="system.personalDescription">{{system.personalDescription}}</textarea>
+        </section>
+      </div>
+
+      {{!-- ---------------------------- Bottom row ------------------------------ --}}
+      <div class="ote-bottom">
+        <section class="box center h-stat">
+          <h3 class="label">{{localize "OTE.HitPoints"}}</h3>
+          <div class="stat-vals">
+            <input type="number" step="1" name="system.hp.value" value="{{system.hp.value}}" aria-label="{{localize 'OTE.HP.Current'}}">
+            <span>/</span>
+            <input type="number" step="1" min="0" name="system.hp.max" value="{{system.hp.max}}" aria-label="{{localize 'OTE.HP.Max'}}">
+          </div>
+          {{#if system.hp.stun}}<div class="stat-note">{{localize "OTE.Damage.StunShort"}} {{system.hp.stun}}</div>{{/if}}
+          <div class="stat-tools">
+            <a data-action="hurt" data-tooltip="OTE.Tip.Hurt"><i class="fa-solid fa-burst"></i></a>
+            <a data-action="recover" data-tooltip="OTE.Tip.Recover"><i class="fa-solid fa-heart-pulse"></i></a>
+            <a data-action="heal" data-tooltip="OTE.Tip.Heal"><i class="fa-solid fa-bed"></i></a>
+            <a data-action="rollHP" data-tooltip="OTE.Tip.RollHP"><i class="fa-solid fa-dice"></i></a>
+          </div>
+        </section>
+
+        <section class="box center h-stat">
+          <h3 class="label">{{#if system.psychic.label}}{{system.psychic.label}}{{else}}{{localize "OTE.PsychicPool"}}{{/if}}</h3>
+          <div class="stat-vals">
+            <input type="number" step="1" min="0" name="system.psychic.value" value="{{system.psychic.value}}" aria-label="{{localize 'OTE.Shots'}}">
+            <span>/</span>
+            <input type="number" step="1" min="0" name="system.psychic.max" value="{{system.psychic.max}}" aria-label="{{localize 'OTE.Max'}}">
+          </div>
+          <div class="stat-tools">
+            <a data-action="psychicAdjust" data-delta="-1" data-tooltip="OTE.Tip.SpendShot"><i class="fa-solid fa-minus"></i></a>
+            <a data-action="psychicAdjust" data-delta="1" data-tooltip="OTE.Tip.GainShot"><i class="fa-solid fa-plus"></i></a>
+            <a data-action="restorePsychic" data-tooltip="OTE.Tip.RestorePsychic"><i class="fa-solid fa-moon"></i></a>
+          </div>
+        </section>
+
+        <section class="box center h-stat">
+          <h3 class="label">{{localize "OTE.ExperiencePool"}}</h3>
+          <div class="stat-vals">
+            <input type="number" step="1" min="0" name="system.xp.value" value="{{system.xp.value}}" aria-label="{{localize 'OTE.Dice'}}">
+            <span>/</span>
+            <input type="number" step="1" min="0" name="system.xp.max" value="{{system.xp.max}}" aria-label="{{localize 'OTE.Max'}}">
+          </div>
+          <div class="stat-tools">
+            <a data-action="newSession" data-tooltip="OTE.Tip.NewSession"><i class="fa-solid fa-rotate"></i></a>
+          </div>
+        </section>
+
+        {{#if isGMC}}
+        <section class="box h-stat gmc-combat">
+          <h3 class="label">{{localize "OTE.GMC.Combat"}}</h3>
+          <div class="gmc-grid">
+            <label>{{localize "OTE.Attack"}}
+              <span><input type="number" min="0" name="system.attack.dice" value="{{system.attack.dice}}">d ×<input type="number" min="0" name="system.attack.factor" value="{{system.attack.factor}}"></span>
+            </label>
+            <label>{{localize "OTE.Defense"}}
+              <span><input type="number" min="0" name="system.defense.dice" value="{{system.defense.dice}}">d</span>
+            </label>
+          </div>
+          <div class="stat-tools">
+            <a data-action="rollGMCAttack" data-tooltip="OTE.Attack"><i class="fa-solid fa-crosshairs"></i></a>
+            <a data-action="rollDefense" data-tooltip="OTE.Defense"><i class="fa-solid fa-shield-halved"></i></a>
+          </div>
+        </section>
+        {{else}}
+        <div class="ote-logo"><img src="{{atlasLogo}}" alt="Atlas Games"></div>
+        {{/if}}
+      </div>
+
+    </div>
+  </div>
+
+  {{else}}
+  {{!-- ============================ BACKGROUND TAB ============================ --}}
+  <div class="ote-page ote-notes">
+    <div class="ote-notes-grid">
+      <section class="box"><h3 class="label">{{localize "OTE.Concept"}}</h3><input type="text" name="system.concept" value="{{system.concept}}"></section>
+      <section class="box"><h3 class="label">{{localize "OTE.Motivation"}}</h3><input type="text" name="system.motivation" value="{{system.motivation}}"></section>
+      <section class="box tall"><h3 class="label">{{localize "OTE.Secret"}}</h3><textarea class="body" name="system.secret">{{system.secret}}</textarea></section>
+      <section class="box tall"><h3 class="label">{{localize "OTE.ImportantPerson"}}</h3><textarea class="body" name="system.importantPerson">{{system.importantPerson}}</textarea></section>
+      <section class="box tall wide"><h3 class="label">{{localize "OTE.Background"}}</h3><textarea class="body" name="system.background">{{system.background}}</textarea></section>
+      {{#if isGMC}}
+      <section class="box tall wide"><h3 class="label">{{localize "OTE.GMC.Connections"}}</h3><textarea class="body" name="system.connections">{{system.connections}}</textarea></section>
+      {{/if}}
+      <section class="box">
+        <h3 class="label">{{localize "OTE.NaturalArmor"}}</h3>
+        <div class="inline-fields">
+          <input type="number" min="0" step="1" name="system.naturalArmor.rating" value="{{system.naturalArmor.rating}}">
+          <select name="system.naturalArmor.unit">{{selectOptions armorUnits selected=system.naturalArmor.unit localize=true}}</select>
+        </div>
+      </section>
+      <section class="box">
+        <h3 class="label">{{localize "OTE.Initiative"}} ({{localize "OTE.Dice"}})</h3>
+        <input type="number" min="1" step="1" name="system.initiative.dice" value="{{system.initiative.dice}}">
+      </section>
+      <section class="box">
+        <h3 class="label">{{localize "OTE.PoolName"}}</h3>
+        <input type="text" name="system.psychic.label" value="{{system.psychic.label}}" placeholder="{{localize 'OTE.PsychicPool'}}">
+      </section>
+    </div>
+  </div>
+  {{/if}}
+
+  </fieldset>
+</div>

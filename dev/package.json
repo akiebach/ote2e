@@ -1,0 +1,10 @@
+{
+  "name": "over-the-edge-dev",
+  "private": true,
+  "type": "module",
+  "description": "Offline checks for the OTE system (no Foundry needed). Not loaded by Foundry.",
+  "scripts": {
+    "test": "node test-rules.mjs && node test-compat.mjs"
+  },
+  "devDependencies": { "handlebars": "^4.7.8" }
+}

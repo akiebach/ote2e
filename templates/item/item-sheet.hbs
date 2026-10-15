@@ -1,0 +1,92 @@
+<div class="ote-item-sheet">
+  <header class="item-head">
+    <img src="{{item.img}}" alt="" data-action="editImage" data-edit="img">
+    <input type="text" name="name" value="{{item.name}}" placeholder="{{localize 'OTE.Name'}}">
+  </header>
+
+  <fieldset class="ote-fs" {{#unless editable}}disabled{{/unless}}>
+
+    {{#if isTrait}}
+    <div class="form-group">
+      <label>{{localize "OTE.Trait.Kind"}}</label>
+      <div class="form-fields"><select name="system.kind">{{selectOptions traitKinds selected=system.kind localize=true}}</select></div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Trait.ScoreType"}}</label>
+      <div class="form-fields"><select name="system.scoreType">{{selectOptions scoreTypes selected=system.scoreType localize=true}}</select></div>
+      <p class="hint">{{localize "OTE.Trait.ScoreTypeHint"}}</p>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Dice"}}</label>
+      <div class="form-fields">
+        <input type="number" min="0" step="1" name="system.dice" value="{{system.dice}}">
+        <button type="button" data-action="ruleDice"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "OTE.Trait.RuleDice"}}</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Superior"}}</label>
+      <div class="form-fields"><input type="checkbox" name="system.superior" {{checked system.superior}}></div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Fringe"}}</label>
+      <div class="form-fields"><input type="checkbox" name="system.fringe" {{checked system.fringe}}></div>
+      <p class="hint">{{localize "OTE.Trait.FringeHint"}}</p>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Trait.Sign"}}</label>
+      <div class="form-fields"><input type="text" name="system.sign" value="{{system.sign}}"></div>
+    </div>
+    {{/if}}
+
+    {{#if isWeapon}}
+    <div class="form-group">
+      <label>{{localize "OTE.Weapon.DamageFactor"}}</label>
+      <div class="form-fields"><input type="number" min="0" step="1" name="system.damageFactor" value="{{system.damageFactor}}"></div>
+      <p class="hint">{{localize "OTE.Weapon.DamageFactorHint"}}</p>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Weapon.AttackType"}}</label>
+      <div class="form-fields"><select name="system.attackType">{{selectOptions attackTypes selected=system.attackType localize=true}}</select></div>
+    </div>
+    {{/if}}
+
+    {{#if isArmor}}
+    <div class="form-group">
+      <label>{{localize "OTE.Armor.Rating"}}</label>
+      <div class="form-fields">
+        <input type="number" min="0" step="1" name="system.rating" value="{{system.rating}}">
+        <select name="system.unit">{{selectOptions armorUnits selected=system.unit localize=true}}</select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Armor.Bulletproof"}}</label>
+      <div class="form-fields"><input type="number" min="0" step="1" name="system.bulletproof" value="{{system.bulletproof}}"></div>
+      <p class="hint">{{localize "OTE.Armor.BulletproofHint"}}</p>
+    </div>
+    <div class="form-group">
+      <label>{{localize "OTE.Armor.Encumbrance"}}</label>
+      <div class="form-fields"><input type="checkbox" name="system.penalty" {{checked system.penalty}}></div>
+      <p class="hint">{{localize "OTE.Armor.EncumbranceHint"}}</p>
+    </div>
+    {{/if}}
+
+    {{#if isGear}}
+    <div class="form-group">
+      <label>{{localize "OTE.Gear.Quantity"}}</label>
+      <div class="form-fields"><input type="number" min="0" step="1" name="system.quantity" value="{{system.quantity}}"></div>
+    </div>
+    {{/if}}
+
+    {{#if hasEquipped}}
+    <div class="form-group">
+      <label>{{localize "OTE.Equipped"}}</label>
+      <div class="form-fields"><input type="checkbox" name="system.equipped" {{checked system.equipped}}></div>
+    </div>
+    {{/if}}
+
+    <div class="form-group stacked">
+      <label>{{localize "OTE.Description"}}</label>
+      <textarea name="system.description" rows="5">{{system.description}}</textarea>
+    </div>
+  </fieldset>
+</div>

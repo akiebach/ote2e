@@ -1,0 +1,249 @@
+{
+  "OTE": {
+    "Name": "Name",
+    "Tab": {
+      "Sheet": "Character Sheet",
+      "Notes": "Background & Notes"
+    },
+    "Sheet": {
+      "Actor": "Over the Edge Sheet",
+      "Item": "Over the Edge Item Sheet"
+    },
+    "HandOfFate": "Hand of Fate",
+    "Defense": "Defense",
+    "Initiative": "Initiative",
+    "Attack": "Attack",
+    "TraitsSigns": "Traits & Signs",
+    "Possessions": "Possessions",
+    "Wounds": "Wounds",
+    "CharacterName": "Character Name",
+    "PlayerName": "Player Name",
+    "Drawing": "Drawing",
+    "PhysicalDescription": "Physical Description",
+    "PersonalDescription": "Personal Description",
+    "HitPoints": "Hit Points",
+    "PsychicPool": "Psychic Pool",
+    "ExperiencePool": "Experience Pool",
+    "Concept": "Concept",
+    "Motivation": "Motivation",
+    "Secret": "Secret",
+    "ImportantPerson": "Important Person",
+    "Background": "Background & Equipment",
+    "NaturalArmor": "Natural Armor",
+    "PoolName": "Name of Psychic Pool",
+    "Funds": "Funds:",
+    "Dice": "Dice",
+    "Max": "Max",
+    "Shots": "shots",
+    "Superior": "Superior trait",
+    "Fringe": "Fringe power (uses psychic pool)",
+    "Delete": "Delete",
+    "DeleteConfirm": "Delete {name}?",
+    "Equipped": "Equipped",
+    "Description": "Description",
+    "Roll": "Roll",
+    "RollTrait": "Roll this trait",
+    "AddTrait": "Add trait",
+    "AddWeapon": "Add weapon",
+    "AddArmor": "Add armor",
+    "AddGear": "Add gear",
+    "ChangeImage": "Change image",
+    "TraitKind": {
+      "central": "Central Trait",
+      "side": "Side Traits",
+      "developed": "Developed Traits",
+      "flaw": "Flaw"
+    },
+    "ScoreType": {
+      "standard": "Standard",
+      "technical": "Technical or unusual",
+      "narrow": "Narrow",
+      "narrowTechnical": "Narrow & technical"
+    },
+    "AttackType": {
+      "normal": "Normal",
+      "bullet": "Bullet",
+      "armorPiercing": "Armor-piercing",
+      "hollowPoint": "Hollow point",
+      "taser": "Taser"
+    },
+    "ArmorUnit": {
+      "points": "Points",
+      "dice": "Dice",
+      "pt": "pt"
+    },
+    "Care": {
+      "active": "Active",
+      "rest": "Rest",
+      "medical": "Medical care"
+    },
+    "Status": {
+      "messedUp": "Messed up (−1 die)",
+      "down": "Down",
+      "dead": "Dead or dying"
+    },
+    "Botch": "Botch!",
+    "Outcome": {
+      "success": "Success",
+      "stalemate": "Stalemate",
+      "failure": "Failure"
+    },
+    "Chat": {
+      "Bonus": "bonus",
+      "Penalty": "penalty",
+      "Pushed": "Pushed",
+      "XP": "Experience die",
+      "ToppedOff": "Blew the top off",
+      "Sixes": "Unstoppable six",
+      "Versus": "vs",
+      "Special": "special effect",
+      "Resolve": "Resolve vs. target",
+      "Margin": "Margin",
+      "Blocked": "Armor stopped it completely.",
+      "ApplyDamage": "Apply damage",
+      "Applied": "Applied",
+      "NoDamage": "No damage gets through.",
+      "Miss": "Miss"
+    },
+    "Dialog": {
+      "Trait": "Trait",
+      "NoTrait": "No trait (2 dice)",
+      "Dice": "Dice",
+      "Bonus": "Bonus dice",
+      "Penalty": "Penalty dice",
+      "ExtraActions": "Extra actions this round",
+      "ExtraActionsHint": "1 extra: a penalty die. Each further extra: one fewer die.",
+      "Experience": "Experience dice",
+      "XPReason": "Justification (required by the rules)",
+      "Push": "Push the power",
+      "PushHint": "Costs 2 shots: roll twice the dice, count the better half.",
+      "Damage": "Damage",
+      "Special": "Special-effect attack",
+      "SpecialHint": "Tackle, disarm, trip, etc.: half damage.",
+      "Divisor": "Divide damage by",
+      "DivisorHint": "Shotguns: the defender's distance dice.",
+      "Difficulty": "Difficulty",
+      "DiffNone": "None",
+      "DiffFixed": "Fixed number",
+      "DiffDice": "GM rolls dice",
+      "DifficultyHint": "Easy 4 / 1 die · Moderate 7 / 2 · Hard 11 / 3 · Really difficult 14 / 4 · Near impossible 18+ / 5-6",
+      "HideOpposition": "Hide the opposing roll",
+      "RollMode": "Roll mode"
+    },
+    "Weapon": {
+      "DamageFactor": "Damage factor",
+      "DamageFactorHint": "Unarmed ×1 · knife/pipe ×2 · sword/axe ×3 · pistols ×3-5 · rifles ×6-7 · 12ga ×10 · taser ×5",
+      "AttackType": "Attack type"
+    },
+    "Armor": {
+      "Title": "Armor",
+      "Encumbrance": "Armor encumbrance",
+      "EncumbranceHint": "Heavy armor: a penalty die on agility actions. Extra layers add another each.",
+      "Rating": "Regular rating",
+      "Bulletproof": "Bullet-proof",
+      "BulletproofHint": "Dice (the \"b\" in 2b). 0 for none."
+    },
+    "Gear": {
+      "Quantity": "Quantity"
+    },
+    "Trait": {
+      "Kind": "Kind",
+      "ScoreType": "Score type",
+      "ScoreTypeHint": "Chooses which Chapter 1 chart \"Set from rules\" uses.",
+      "RuleDice": "Set from rules",
+      "FringeHint": "Each use spends a shot from the psychic pool.",
+      "Sign": "Sign"
+    },
+    "GMC": {
+      "Role": "Identifying Phrase",
+      "Combat": "Combat",
+      "Connections": "Connections"
+    },
+    "HP": {
+      "Current": "Current hit points",
+      "Max": "Maximum hit points",
+      "NoTraits": "No traits to choose from: hit points will be 14.",
+      "Hint": "Choose the traits that relate to toughness, strength or fighting. 7 hit points per die; with no such trait, 14.",
+      "Mode": "Method",
+      "Average": "Take the average",
+      "RollIt": "Roll (twice the dice, highest trait wins)",
+      "RollTitle": "Set Hit Points",
+      "Set": "Set",
+      "Result": "{name} rolls hit points: {max}."
+    },
+    "Heal": {
+      "Care": "Care",
+      "Days": "Days",
+      "Critical": "Critical",
+      "CriticalHint": "Severely wounded, at the GM's option.",
+      "Title": "Long-Term Healing",
+      "Go": "Heal",
+      "Done": "{name} heals {gained} hit points over {days} day(s)."
+    },
+    "Damage": {
+      "Amount": "Damage",
+      "Stun": "Temporary (stun)",
+      "StunHint": "Taser damage all comes back on recovery.",
+      "StunShort": "stun",
+      "Title": "Take Damage",
+      "Apply": "Apply"
+    },
+    "Recover": {
+      "Percent": "Percent recovered",
+      "Hint": "Normally half of the lost hit points (the GM may rule otherwise).",
+      "Title": "Recovery",
+      "Go": "Recover",
+      "Done": "{name} recovers to {value} hit points."
+    },
+    "Tip": {
+      "Hurt": "Take damage",
+      "Recover": "Recover half (Shift-click to choose the fraction)",
+      "Heal": "Long-term healing",
+      "RollHP": "Set hit points from traits",
+      "SpendShot": "Spend a shot",
+      "GainShot": "Regain a shot",
+      "RestorePsychic": "Restore the whole pool (24 hours)",
+      "NewSession": "New session: restore experience dice"
+    },
+    "Warn": {
+      "NotEnoughShots": "{name} does not have enough psychic shots.",
+      "NoTarget": "Target a token first.",
+      "NoActor": "The target no longer exists.",
+      "NotOwner": "You do not own the target."
+    },
+    "Settings": {
+      "botches": {
+        "name": "Botches",
+        "hint": "All kept dice show 1: the action fails automatically and something goes wrong."
+      },
+      "blowTheTop": {
+        "name": "Blowing the Top Off",
+        "hint": "All kept dice show 6: roll another die and add it, repeating on 6s."
+      },
+      "unstoppableSix": {
+        "name": "The Unstoppable Six",
+        "hint": "Any 6 on a kept die is flagged on the card for a limited success even on a failure."
+      },
+      "multipleXP": {
+        "name": "Multiple Experience Dice",
+        "hint": "Allow more than one experience die on a single roll."
+      },
+      "autoPenalty": {
+        "name": "Automatic Penalty Dice",
+        "hint": "Pre-fill penalty dice for being messed up and for heavy armor on agility actions."
+      }
+    }
+  },
+  "TYPES": {
+    "Actor": {
+      "character": "Character",
+      "gmc": "GMC"
+    },
+    "Item": {
+      "trait": "Trait",
+      "weapon": "Weapon",
+      "armor": "Armor",
+      "gear": "Gear"
+    }
+  }
+}
