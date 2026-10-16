@@ -66,13 +66,13 @@ assert.equal(d.damage, 1); console.log("✓ hollow point vs kevlar: 10 ÷ 8 → 
 queue.push(3);   // Peace Officer vs .38 (X4): margin 4 → 16, uniform rolls 3 → halved → 1 → 15
 d = await dmg({ attackTotal: 11, defenseTotal: 7, factor: 4, attackType: "bullet", armor: { points: 0, dice: 1, bpDice: 0 } });
 assert.equal(d.damage, 15); console.log("✓ Peace Officer shot: 16 − 1 = 15");
+
 d = await dmg({ attackTotal: 5, defenseTotal: 9, factor: 3, attackType: "normal", armor: noArmor }); assert.equal(d.hit, false);
-d = await dmg({ attackTotal: 12, defenseTotal: 5, factor: 2, attackType: "normal", special: true, armor: noArmor }); assert.equal(d.damage, 7); // 14 → half
-d = await dmg({ attackTotal: 12, defenseTotal: 2, factor: 10, attackType: "bullet", divisor: 3, armor: noArmor }); assert.equal(d.damage, 33); // shotgun 100/3
+d = await dmg({ attackTotal: 12, defenseTotal: 5, factor: 2, attackType: "normal", special: true, armor: noArmor }); assert.equal(d.damage, 7); assert.equal(d.raw, 14); // 14 → half
+d = await dmg({ attackTotal: 12, defenseTotal: 2, factor: 10, attackType: "bullet", divisor: 3, armor: noArmor }); assert.equal(d.damage, 33); assert.equal(d.raw, 100); // shotgun 100/3
 d = await dmg({ attackTotal: 9, defenseTotal: 5, factor: 5, attackType: "taser", armor: { points: 5, dice: 0, bpDice: 0 } }); assert.equal(d.blocked, true); // protection 5 ≥ margin 4
 d = await dmg({ attackTotal: 9, defenseTotal: 5, factor: 5, attackType: "taser", armor: { points: 1, dice: 0, bpDice: 0 } }); assert.equal(d.damage, 20); assert.equal(d.stun, true);
-d = await dmg({ attackTotal: 20, defenseTotal: 10, factor: 3, attackType: "armorPiercing", armor: { points: 1, dice: 0, bpDice: 1 } }); assert.equal(d.damage, 14); // (30−2)/2
-d = await dmg({ attackTotal: 0, attackBotch: true, defenseTotal: 1, factor: 3, attackType: "normal", armor: noArmor }); assert.equal(d.hit, false);
+d = await dmg({ attackTotal: 20, defenseTotal: 10, factor: 3, attackType: "armorPiercing", armor: { points: 1, dice: 0, bpDice: 1 } }); assert.equal(d.damage, 14); assert.equal(d.rolls.length, 0); // (30−2)/2, uses dice counts not rollsd = await dmg({ attackTotal: 0, attackBotch: true, defenseTotal: 1, factor: 3, attackType: "normal", armor: noArmor }); assert.equal(d.hit, false);
 console.log("✓ miss / special effect / shotgun / taser / armor-piercing / botch");
 
 // 5. Recovery (Ch.1 conventions) — drive OTEActor methods against a fake actor
