@@ -211,3 +211,6 @@
 /* Notes tab: number + unit select side by side */
 .ote .ote-notes .inline-fields input[type="number"] { flex: none; width: 4em; }
 .ote .ote-notes .inline-fields select { flex: 1; min-width: 0; }
+
+/* Scope the min-width so it stops stretching the 460 px item sheet */
+.ote.actor-sheet.application { min-width: 560px; }
