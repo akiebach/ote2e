@@ -8,14 +8,14 @@
 
   {{#if hit}}
     <ul class="ote-breakdown">
-      <li>{{localize "OTE.Chat.Margin"}} {{margin}} × {{localize "OTE.Weapon.DamageFactor"}} {{factor}} = <strong>{{raw}}</strong></li>
+      <li>{{localize "OTE.Chat.Margin"}} {{margin}} × {{localize "OTE.Weapon.DamageFactor"}} {{factor}} = <strong>{{raw}}</strong>{{#if special}} · {{localize "OTE.Chat.Special"}} (½){{/if}}{{#if divisorShown}} · ÷{{divisor}}{{/if}}</li>
       {{#if hasArmor}}
       <li>{{localize "OTE.Armor.Title"}}:
-        {{#if armor.dice}}{{armor.dice}}d → {{armor.regRoll}}{{/if}}
+        {{#if armor.dice}}{{armor.dice}}d{{#if rolledArmor}} → {{armor.regRoll}}{{/if}}{{/if}}
         {{#if armor.points}}{{#if armor.dice}} + {{/if}}{{armor.points}} {{localize "OTE.ArmorUnit.points"}}{{/if}}
-        {{#if armor.bpDice}} · {{localize "OTE.Armor.Bulletproof"}} {{armor.bpDice}}b → {{armor.bpRoll}}{{/if}}
+        {{#if armor.bpDice}} · {{localize "OTE.Armor.Bulletproof"}} {{armor.bpDice}}b{{#if rolledArmor}} → {{armor.bpRoll}}{{/if}}{{/if}}
         {{#if armor.reduction}} · −{{armor.reduction}}{{/if}}
-        {{#if armor.divide}}{{#if armor.bpDice}} · ÷{{armor.divide}}{{/if}}{{/if}}
+        {{#if armorDivideShown}} · ÷{{armor.divide}}{{/if}}
       </li>
       {{/if}}
       {{#if blocked}}<li>{{localize "OTE.Chat.Blocked"}}</li>{{/if}}
