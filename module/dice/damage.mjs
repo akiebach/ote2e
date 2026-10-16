@@ -41,7 +41,8 @@ export async function computeDamage(p) {
   const margin = attack - defense;
   const out = {
     hit: margin > 0, margin, attack, defense, factor: p.factor, attackType: p.attackType,
-    raw: 0, damage: 0, stun: p.attackType === "taser", blocked: false,
+    raw: 0, special: !!p.special, divisor: p.divisor > 1 ? p.divisor : 1,
+    damage: 0, stun: p.attackType === "taser", blocked: false,
     armor: { points: p.armor.points, dice: p.armor.dice, bpDice: p.armor.bpDice, regRoll: 0, bpRoll: 0, reduction: 0, divide: 1 },
     rolls: []
   };
@@ -50,13 +51,15 @@ export async function computeDamage(p) {
   const factor = p.factor + (p.attackType === "hollowPoint" ? 2 : 0);
   out.factor = factor;
   let dmg = margin * factor;
+  out.raw = dmg;                        // margin × factor, *before* special-effect / divisor
   if (p.special) dmg = Math.floor(dmg / 2);
   if (p.divisor > 1) dmg = dmg / p.divisor;
-  out.raw = dmg;
 
+  // Armor-piercing works off the *number* of armor dice, so it never rolls them.
+  const armorPiercing = p.attackType === "armorPiercing";
   const { points, dice, bpDice } = p.armor;
-  const reg = await rollDice(dice);
-  const bp = await rollDice(bpDice);
+  const reg = armorPiercing ? { total: 0, roll: null } : await rollDice(dice);
+  const bp = armorPiercing ? { total: 0, roll: null } : await rollDice(bpDice);
   if (reg.roll) out.rolls.push(reg.roll);
   if (bp.roll) out.rolls.push(bp.roll);
   out.armor.regRoll = reg.total;
@@ -108,6 +111,8 @@ export async function postDamageCard({ attacker, targetActor, targetToken, weapo
     attack: dmg.attack, defense: dmg.defense,
     attackBotch: attackResult.botch, defenseBotch: defenseResult.botch,
     hit: dmg.hit, margin: dmg.margin, factor: dmg.factor, raw: Math.round(dmg.raw),
+    special: dmg.special, divisorShown: dmg.divisor > 1, divisor: dmg.divisor,
+    rolledArmor: dmg.attackType !== "armorPiercing", armorDivideShown: dmg.armor.divide > 1,
     armor: dmg.armor, hasArmor: dmg.armor.points + dmg.armor.dice + dmg.armor.bpDice > 0,
     blocked: dmg.blocked, damage: dmg.damage, stun: dmg.stun
   };
