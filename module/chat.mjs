@@ -8,6 +8,7 @@ import { evaluateRoll, applySpends } from "./dice/roll.mjs";
 import { computeDamage, postDamageCard } from "./dice/damage.mjs";
 
 const localize = k => game.i18n.localize(k);
+const format = (k, d) => game.i18n.format(k, d);
 
 /** Hook: renderChatMessageHTML */
 export function bindChatListeners(message, html) {
