@@ -52,9 +52,13 @@ async function resolveAttack(message) {
       // The defender's own dialog is a plain roll: no damage section, no difficulty.
       defense: true
     });
+
     if (!opts) continue;
 
-    await applySpends(target, opts);
+    // Only the owner may deduct the defender's experience dice / psychic shots.
+    if (target.isOwner) await applySpends(target, opts);
+    else if (opts.xpSpent > 0 || opts.shotsSpent > 0)
+      ui.notifications.warn(format("OTE.Warn.SpendNotOwner", { name: target.name }));
     const defense = await evaluateRoll({ ...opts, difficulty: { mode: "none" } });
     const dmg = await computeDamage({
       attackTotal: attackData.total, attackBotch: attackData.botch,
