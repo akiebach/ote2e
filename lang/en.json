@@ -206,6 +206,7 @@
       "NewSession": "New session: restore experience dice"
     },
     "Warn": {
+      "SpendNotOwner": "Rolled defense for {name}, but you can't update their pools — ask the GM to deduct the spend.",
       "NotEnoughShots": "{name} does not have enough psychic shots.",
       "NoTarget": "Target a token first.",
       "NoActor": "The target no longer exists.",
